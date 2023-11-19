@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <script>
+        async function fetchData() {
+            try {
+                // AJAX-Aufruf mit Fetch-API
+                const response = await fetch('example.html');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Empfangene Daten
+                const data = await response.text();
+                // Rückgabe der Daten
+                return data;
+            } catch (error) {
+                // Fehlerbehandlung
+                throw error;
+            }
+            }
+            console.log('Start script...');     
+            // Verwendung von async/await
+            // (async () => {
+            //     try {
+            //         const result = await fetchData();
+            //         console.log('Daten erfolgreich erhalten:');
+            //         console.log('Result: ', result);
+            //         document.getElementById('contentContainer').innerHTML = result;
+            //     } catch (error) {
+            //         console.error('Fehler beim Abrufen der Daten:', error);
+            //     }
+            //     })();    
+            
+            // Verwendung von async/await
+            async function callAsyncFunction() {
+                const result = await fetchData();
+                console.log('Daten erfolgreich erhalten:');
+                console.log('Result: ', result);
+                document.getElementById('contentContainer').innerHTML = result;          
+            }
+            callAsyncFunction();
+            console.log('Done!');
+        </script>
+    </head>
+    <body>
+        <h1>Ready fetch Data mit async/awaint</h1>
+        <div id="contentContainer" style="color: aqua; border: 2px solid blanchedalmond; padding: 5px;">
+            <!-- Hier wird der HTML-Inhalt eingefügt -->
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script>
+        function loadDelayedPage(url, delay) {
+            return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(htmlContent => {
+                    resolve(htmlContent);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+            }, delay);
+            });
+        }
+        
+        // Beispiel: Laden einer Seite mit Verzögerung und Verwendung des Promises
+        const url = 'example.html';
+        const delay = 5000; // Verzögerung in Millisekunden (hier 5 Sekunden)
+        console.log('Start script...');   
+        loadDelayedPage(url, delay)
+            .then(result => {
+            console.log('Seite erfolgreich geladen nach Verzögerung: ' + delay + ' ms.');
+            console.log('Result: ', result);
+            document.getElementById('contentContainer').innerHTML = result;            
+            })
+            .catch(error => {
+            console.error('Fehler beim Laden der Seite:', error);
+            });
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('staticContainer');
+            for(let i = 1; i < 10; i++)
+            {
+                const paragraph = document.createElement('p');            
+                paragraph.textContent = 'Synchron geladen ' + i;
+                // Hinzufügen des <p>-Tags zum Container
+                container.appendChild(paragraph);
+            }
+            });
+        console.log('Done!');
+        </script>
+    </head>
+    <body>
+        <h1>Ready fetch Data mit delayed promise</h1>
+        <div id="contentContainer" style="color: orange; border: 2px solid burlywood; padding: 5px;">
+            <!-- Hier wird der HTML-Inhalt eingefügt -->
+        </div>
+        <div id="staticContainer" style="color: yellowgreen; border: 2px solid green; padding: 5px;">
+            <!-- Hier wird der HTML-Inhalt eingefügt -->
+        </div>
+    </body>
+</html>

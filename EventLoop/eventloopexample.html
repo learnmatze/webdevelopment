@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <script>            
+            document.addEventListener('DOMContentLoaded', function () {
+                const container = document.getElementById('staticContainer');
+                const foo = () => 
+                {
+                    console.log("First");
+                    const paragraph = document.createElement('p');            
+                    paragraph.textContent = 'First synchron geladen';
+                    container.appendChild(paragraph);
+                };
+                const bar = () => setTimeout(() => 
+                { 
+                    console.log("Second") 
+                    const paragraph = document.createElement('p');            
+                    paragraph.textContent = 'Second asynchron geladen';
+                    container.appendChild(paragraph);
+                }, 2000);
+                const baz = () => {
+                    console.log("Third");                
+                    const paragraph = document.createElement('p');            
+                    paragraph.textContent = 'Third synchron geladen';
+                    container.appendChild(paragraph);
+                };
+                bar();
+                foo();
+                baz();
+            });                        
+        </script>
+    </head>
+    <body>
+        <h1>Eventloop example</h1>
+        <div id="staticContainer" style="color: yellowgreen; border: 2px solid green; padding: 5px;">
+            <!-- Hier wird der HTML-Inhalt eingefügt -->
+        </div>
+    </body>
+</html>
