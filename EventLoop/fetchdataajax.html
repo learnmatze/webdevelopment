@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <script>
+        function fetchData() {
+            // Create a new XMLHttpRequest object
+            console.log('fetch data called.');
+            var xhr = new XMLHttpRequest();
+            var apiUrl = 'example.html';
+            xhr.open('GET', apiUrl, true);
+            // Set up the callback function to handle the response
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    // Check if the response status is OK (200)
+                    if (xhr.status == 200) {
+                        var result = xhr.responseText;
+                        console.log('Daten erfolgreich von Ajax Call erhalten:');  
+                        console.log('Data received:', result);              
+                        document.getElementById('contentContainer').innerHTML = result;
+                    } else {
+                        // Log an error message if the response status is not OK
+                        console.error('Error fetching data. Status:', xhr.status);
+                    }
+                }
+            };
+            xhr.send();
+        }
+        console.log('Start script...');        
+        fetchData();
+        console.log('Done!');
+        </script>
+    </head>
+    <body>
+        <h1>Ready get Data with classic ajax</h1>
+        <div id="contentContainer" style="color: gold; border: 2px solid goldenrod; padding: 5px;">
+            <!-- Hier wird der HTML-Inhalt eingefügt -->
+        </div>
+    </body>
+</html>
